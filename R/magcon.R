@@ -30,7 +30,7 @@ magcon = function(x,y,h,doim=TRUE,docon=TRUE,dobar=TRUE,ngrid=100,add=FALSE,xlab
   suppressWarnings({
     temp = sort(tempcon$z)
     tempsum = cumsum(temp)
-    convfunc = approxfun(temp, tempsum)
+    convfunc = approxfun(temp, tempsum, ties = "ordered")
   })
   
   #levelmap=approxfun(convfunc(seq(0,1,len=1000)),seq(0,1,len=1000))
