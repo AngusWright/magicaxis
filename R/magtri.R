@@ -75,9 +75,9 @@ magtri = function(chains, samples=1000, thin=1, samptype='end', grid=FALSE, do.t
           ytemp = chains[usesamps,j]
           if(sd(xtemp)==0){xtemp=xtemp+rnorm(samples,sd=1e-3)}
           if(sd(ytemp)==0){ytemp=ytemp+rnorm(samples,sd=1e-3)}
-          ParmOff(magaxis, dots, side=1:2, grid=grid, grid.col='lightgrey', labels=FALSE, do.tick=do.tick, .pass_dots=FALSE)
-          ParmOff(magcon, dots, x=xtemp, y=ytemp, dobar=FALSE, doim=FALSE, add=TRUE, lty=c(2,1,3), xlim=xrange, ylim=yrange, h=c(sdvec[i], sdvec[j])/5, .pass_dots=TRUE, .clash='last')
-          ParmOff(points.default, dots, x=meanvec[i], y=meanvec[j], col='red', pch=4, cex=2, .pass_dots=TRUE, .clash = 'last')
+          dots_carry = ParmOff(magaxis, dots, side=1:2, grid=grid, grid.col='lightgrey', labels=FALSE, do.tick=do.tick, .pass_dots=FALSE, .return = 'func_args')$args_out$ignore_args
+          dots_carry = ParmOff(magcon, dots_carry, x=xtemp, y=ytemp, dobar=FALSE, doim=FALSE, add=TRUE, lty=c(2,1,3), xlim=xrange, ylim=yrange, h=c(sdvec[i], sdvec[j])/5, .pass_dots=TRUE, .clash='last', .return = 'func_args')$args_out$ignore_args
+          ParmOff(points.default, dots_carry, x=meanvec[i], y=meanvec[j], col='red', pch=4, cex=2, .pass_dots=TRUE, .clash = 'last')
           box()
           if(draw.sig){
             abline(v=meanvec[i],lty=1,col='red')
@@ -101,7 +101,7 @@ magtri = function(chains, samples=1000, thin=1, samptype='end', grid=FALSE, do.t
           plot.new()
           plot.window(xlim=xrange,ylim=yrange)
           dots_carry = ParmOff(magaxis, dots, side=1:2, grid=grid, grid.col='lightgrey', labels=FALSE, do.tick=do.tick, .pass_dots=FALSE, .return='func_args')$args_out$ignore_args
-          ParmOff(points.default, dots_carry, x=chains[usesamps,i], y=chains[usesamps,j], pch='.', col='darkgrey', .pass_dots=TRUE)
+          dots_carry = ParmOff(points.default, dots_carry, x=chains[usesamps,i], y=chains[usesamps,j], pch='.', col='darkgrey', .pass_dots=TRUE)
           ParmOff(points.default, dots_carry, x=meanvec[i], y=meanvec[j], col='red', pch=4, cex=2, .pass_dots=TRUE)
           box()
           if(draw.sig){
