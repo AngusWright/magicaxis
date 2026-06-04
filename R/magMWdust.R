@@ -26,7 +26,7 @@ magMWdust <- function(type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0
   # Draw filled polygons when polygon mode has been requested.
   if (type == "pl") {
     # Open a progress bar for the per-cell polygon loop.
-    if (interactive() & show.status) { 
+    if (interactive() & isTRUE(show.status)) { 
       pb <- txtProgressBar(style = 3, min = 1, max = nrow(dust))
     }
     # Iterate over each retained sky cell.
@@ -34,12 +34,12 @@ magMWdust <- function(type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0
       # Project and draw the four corners of the current sky cell.
       magicaxis::magproj(c(dust$ra[i] - dlon/2, dust$ra[i] - dlon/2, dust$ra[i] + dlon/2, dust$ra[i] + dlon/2), c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), ...)
       # Advance the progress bar after drawing the current polygon.
-      if (interactive() & show.status) {
+      if (interactive() & isTRUE(show.status)) {
         setTxtProgressBar(pb, i)
       } 
     }
     # Close the progress bar when the polygon layer is complete.
-    if (interactive() & show.status) {
+    if (interactive() & isTRUE(show.status)) {
       close(pb)
     }
   } else {
