@@ -80,17 +80,20 @@ caused by over- (or under-)lapping points.
 Returns \code{NULL} invisibly. The function is called for its plotting side
 effects.
 }
+\references{
+  Schlegel, Finkbeiner, & Davis, 1998, ApJ, 500, 2, 525
+}
 \author{
-Angus H Wright, default dust map from Schlegel, Finkbeiner & Davis (1998)
+  Angus H Wright
 }
 \seealso{
 \code{\link{magmap}}, \code{\link{magproj}}
 }
 \examples{
-  magproj(0,0,type='n') #Construct a base magproj plot 
-  magMWdust() #add MW dust map as points 
-  \dontrun{
-  magMWdust(type = "pl") #add MW dust map as polygons 
-  }
+magproj(0,0,type='n') #Construct a base magproj plot 
+magMWdust() #add MW dust map as points 
+\dontrun{
+magMWdust(type = "pl") #add MW dust map as polygons 
+}
 }
 \keyword{plot}
