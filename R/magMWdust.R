@@ -16,7 +16,7 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
   # If none provided, read the dust map data, which is a dlon=dlat=1 sampling  
   if (is.null(dust.data)) { 
     # Define the dlon and dlat values
-    dlon <- dlat <- 1
+    dlon <- dlat <- 0.99
     # Lazy load the SFD_dust data
     dust_all<-SFD_dust
   } else { 
