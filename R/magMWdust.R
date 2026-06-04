@@ -9,7 +9,7 @@
 
 
 # Define a plotting helper that overlays Milky Way dust on a projected sky plot.
-magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0.5), whiteblack.percentile = c(0.1, 0.95), stretch = "lin", min.opacity.plot = 0.01, show.status = TRUE, ...) {
+magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0.5), whiteblack.percentile = c(0.5, 0.95), stretch = "lin", min.opacity.plot = 0.01, show.status = TRUE, ...) {
 
   # Restrict the drawing style to points or polygons.
   if (!type %in% c("pl", "p")) stop("magMWdust function expects type of 'p' (for points) or 'pl' (for polygons) only")
@@ -50,7 +50,7 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
     # Iterate over each retained sky cell.
     for (i in 1:nrow(dust)) {
       # Project and draw the four corners of the current sky cell.
-      magicaxis::magproj(c(dust$ra[i] - dlon/2, dust$ra[i] - dlon/2, dust$ra[i] + dlon/2, dust$ra[i] + dlon/2), c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), ...)
+      magicaxis::magproj(c(dust$ra[i] - dlon/2, dust$ra[i] - dlon/2, dust$ra[i] + dlon/2, dust$ra[i] + dlon/2), c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), border=NA, ...)
       # Advance the progress bar after drawing the current polygon.
       if (interactive() & isTRUE(show.status)) {
         setTxtProgressBar(pb, i)
