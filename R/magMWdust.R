@@ -50,9 +50,7 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
     # Iterate over each retained sky cell.
     for (i in 1:nrow(dust)) {
       # Project and draw the four corners of the current sky cell.
-      # Include rounding to avoid floating point errors that can cause wrapping of polygons around plot limits 
-      magicaxis::magproj(
-                         c(dust$ra[i]  - dlon/2, dust$ra[i]  - dlon/2, dust$ra[i]  + dlon/2, dust$ra[i]  + dlon/2), 
+      magicaxis::magproj(c(dust$ra[i]  - dlon/2, dust$ra[i]  - dlon/2, dust$ra[i]  + dlon/2, dust$ra[i]  + dlon/2), 
                          c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), 
                          type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), border=NA, ...)
       # Advance the progress bar after drawing the current polygon.
