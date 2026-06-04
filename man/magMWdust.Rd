@@ -81,7 +81,7 @@ Returns \code{NULL} invisibly. The function is called for its plotting side
 effects.
 }
 \author{
-Angus H Wright 
+Angus H Wright, default dust map from Schlegel, Finkbeiner & Davis (1998)
 }
 \seealso{
 \code{\link{magmap}}, \code{\link{magproj}}
