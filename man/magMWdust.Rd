@@ -54,9 +54,12 @@ Additional arguments passed to \code{\link{magproj}}.
 }
 }
 \details{
-The function looks up \code{E(B-V)} values from the SFD dust map, sampled on a 1x1 deg grid and including 
-only cells with values greater than approximately 6 (equating to the 40th percentile of \code{E(B-V)} amplitudes and
-above). These values are then mapped to point (or polygon, see below) opacity with \code{\link{magmap}}.
+The function plots \code{E(B-V)} values from a provided dust map data.frame, or if none is provided uses a lazy-loaded
+SFD dust map which is sampled on a 1x1 deg grid and including 
+cells on-sky with values greater than approximately 6 (equating to the 40th percentile of \code{E(B-V)} amplitudes and
+above). This lookup table is then mapped to points (or polygons, see below) with opacity determined by
+\code{\link{magmap}}, using the requested white/black points defined using percentiles (\code{whiteblack.percentile}) 
+of the map, and throwing away cells whose opacity is below the requested minimum (\code{min.opacity.plot}).
 
 When \code{type = "pl"} each retained grid cell is drawn as a projected
 four-corner polygon. Otherwise the retained cells are drawn as projected
