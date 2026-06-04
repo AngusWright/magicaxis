@@ -9,12 +9,13 @@
 
 
 # Define a plotting helper that overlays Milky Way dust on a projected sky plot.
-magMWdust <- function(dust.data = NULL, type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0.5), whiteblack.percentile = c(0.5, 0.95), stretch = "lin", min.opacity.plot = 0.01, show.status = TRUE, ...) {
+magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pch = 16, pt.cex = 0.5, opacity.range = c(0, 0.5), whiteblack.percentile = c(0.1, 0.95), stretch = "lin", min.opacity.plot = 0.01, show.status = TRUE, ...) {
 
   # Restrict the drawing style to points or polygons.
   if (!type %in% c("pl", "p")) stop("magMWdust function expects type of 'p' (for points) or 'pl' (for polygons) only")
   # If none provided, read the dust map data, which is a dlon=dlat=1 sampling  
   if (is.null(dust.data)) { 
+    # Define the dlon and dlat values
     dlon <- dlat <- 1
     # Lazy load the SFD_dust data
     dust_all<-SFD_dust
@@ -26,6 +27,8 @@ magMWdust <- function(dust.data = NULL, type = "p", pch = 16, pt.cex = 0.5, opac
       stop("dust.data is missing required components; load an example with data(SFD_dust)") 
     }
     dust_all<-dust.data 
+    if (isNULL(dlon)) stop("dlon must be provided when providing input dust.data") 
+    if (isNULL(dlat)) stop("dlat must be provided when providing input dust.data") 
   }
   # Map dust values onto an opacity scale for plotting.
   dust_all$map <- magicaxis::magmap(dust_all$ebv, range = opacity.range, hicut = whiteblack.percentile[2], locut = whiteblack.percentile[1], stretch = stretch)$map

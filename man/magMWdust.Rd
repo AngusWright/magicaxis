@@ -10,6 +10,7 @@ points or filled polygons.
 }
 \usage{
 magMWdust(dust.data = NULL, 
+  dlon = NULL, dlat = NULL, 
   type = "p", pch = 16, pt.cex = 0.5,
   opacity.range = c(0, 0.5),
   whiteblack.percentile = c(0.5, 0.95),
@@ -21,6 +22,14 @@ magMWdust(dust.data = NULL,
 The data set to use for drawing the dust map. If \code{NULL} (the default), the function 
 lazy-loads the SFD dust map data provided with the package (\code{data("SFD_dust")}). The 
 code expects this data to be a data frame containing columns "ra", "dec", and "ebv". 
+}
+  \item{dlon}{
+Step size between element of longitude. Required when specifying dust.data directly, 
+and uses \code{dlon=1} when lazy-loading the internal dust map. 
+}
+  \item{dlat}{
+Step size between element of latitude. Required when specifying dust.data directly, 
+and uses \code{dlat=1} when lazy-loading the internal dust map. 
 }
   \item{type}{
 Character scalar giving the drawing mode: \code{"p"} for points or \code{"pl"}
