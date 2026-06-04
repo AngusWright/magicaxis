@@ -42,7 +42,14 @@ magproj=function(long, lat, type='b', plottext, longlim=c(-180,180), latlim=c(-9
   }
   
   long= (long+(180-orientation[2])) %% 360 - (180-orientation[2])
-  lat= (lat+90) %% 180 - 90
+  .lat_wrap <- function(x) { 
+    x[abs(x)==180]<-0
+    x=(x+180)%%360-180
+    x[which(x>= +90)]<- +90-x[which(x>= +90)]%%90
+    x[which(x<= -90)]<- -90+abs(x[which(x<= -90)])%%90
+    return=x
+  }
+  lat= .lat_wrap(lat)
   
   if(add==FALSE){
     if(auto==TRUE){
