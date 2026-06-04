@@ -64,7 +64,7 @@ effects.
 Angus H Wright 
 }
 \seealso{
-\code{\link{dust_getval}}, \code{\link{magmap}}, \code{\link{magproj}}
+\code{\link{magmap}}, \code{\link{magproj}}
 }
 \examples{
   magproj(0,0,type='n') #Construct a base magproj plot 
