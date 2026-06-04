@@ -27,10 +27,12 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
       stop("dust.data is missing required components; load an example with data(SFD_dust)") 
     }
     dust_all<-dust.data 
-    if (is.null(dlon)) stop("dlon must be provided when providing input dust.data") 
-    if (is.null(dlat)) stop("dlat must be provided when providing input dust.data") 
-    if (!is.numeric(dlon)) stop("dlon must be numeric") 
-    if (!is.numeric(dlat)) stop("dlat must be numeric") 
+    if (type=='pl') { 
+      if (is.null(dlon)) stop("dlon must be provided when providing input dust.data and using type == 'pl'") 
+      if (is.null(dlat)) stop("dlat must be provided when providing input dust.data and using type == 'pl'") 
+      if (!is.numeric(dlon)) stop("dlon must be numeric") 
+      if (!is.numeric(dlat)) stop("dlat must be numeric") 
+    }
   }
   # Map dust values onto an opacity scale for plotting.
   dust_all$map <- magicaxis::magmap(dust_all$ebv, range = opacity.range, hicut = whiteblack.percentile[2], locut = whiteblack.percentile[1], stretch = stretch)$map
