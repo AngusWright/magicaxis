@@ -9,13 +9,19 @@ constructed from the SFD dust map on an equatorial grid, and drawing the result 
 points or filled polygons.
 }
 \usage{
-magMWdust(type = "p", pch = 16, pt.cex = 0.5,
+magMWdust(dust.data = NULL, 
+  type = "p", pch = 16, pt.cex = 0.5,
   opacity.range = c(0, 0.5),
   whiteblack.percentile = c(0.5, 0.95),
   stretch = "lin",
   min.opacity.plot = 0.01, show.status = TRUE, ...)
 }
 \arguments{
+  \item{dust.data}{
+The data set to use for drawing the dust map. If \code{NULL} (the default), the function 
+lazy-loads the SFD dust map data provided with the package (\code{data("SFD_dust")}). The 
+code expects this data to be a data frame containing columns "ra", "dec", and "ebv". 
+}
   \item{type}{
 Character scalar giving the drawing mode: \code{"p"} for points or \code{"pl"}
 for polygons.
