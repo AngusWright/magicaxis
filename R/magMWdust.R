@@ -16,7 +16,7 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
   # If none provided, read the dust map data, which is a dlon=dlat=1 sampling  
   if (is.null(dust.data)) { 
     # Define the dlon and dlat values
-    dlon <- dlat <- 0.99
+    dlon <- dlat <- 1
     # Lazy load the SFD_dust data
     dust_all<-SFD_dust
   } else { 
@@ -50,7 +50,11 @@ magMWdust <- function(dust.data = NULL, dlon = NULL, dlat = NULL, type = "p", pc
     # Iterate over each retained sky cell.
     for (i in 1:nrow(dust)) {
       # Project and draw the four corners of the current sky cell.
-      magicaxis::magproj(c(dust$ra[i] - dlon/2, dust$ra[i] - dlon/2, dust$ra[i] + dlon/2, dust$ra[i] + dlon/2), c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), border=NA, ...)
+      # Include rounding to avoid floating point errors that can cause wrapping of polygons around plot limits 
+      magicaxis::magproj(
+                         c(dust$ra[i]  - dlon/2, dust$ra[i]  - dlon/2, dust$ra[i]  + dlon/2, dust$ra[i]  + dlon/2), 
+                         c(dust$dec[i] - dlat/2, dust$dec[i] + dlat/2, dust$dec[i] + dlat/2, dust$dec[i] - dlat/2), 
+                         type = type, add = TRUE, col = hsv(v = 0, alpha = dust$map[i]), border=NA, ...)
       # Advance the progress bar after drawing the current polygon.
       if (interactive() & isTRUE(show.status)) {
         setTxtProgressBar(pb, i)
