@@ -13,7 +13,7 @@ magMWdust(type = "p", pch = 16, pt.cex = 0.5,
   opacity.range = c(0, 0.5),
   whiteblack.percentile = c(0.5, 0.95),
   stretch = "lin",
-  min.opacity.plot = 0.01, ...)
+  min.opacity.plot = 0.01, show.status = TRUE, ...)
 }
 \arguments{
   \item{type}{
@@ -39,6 +39,9 @@ Stretch mode passed through to \code{\link{magmap}}.
 }
   \item{min.opacity.plot}{
 Minimum mapped opacity required for a grid cell to be drawn.
+}
+  \item{show.status}{
+Option to show a progress bar when drawing polygons. 
 }
   \item{\dots}{
 Additional arguments passed to \code{\link{magproj}}.
@@ -73,5 +76,4 @@ Angus H Wright
   magMWdust(type = "pl") #add MW dust map as polygons 
   }
 }
-\keyword{dust}
 \keyword{plot}
