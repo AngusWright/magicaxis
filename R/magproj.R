@@ -15,7 +15,7 @@ magproj=function(long, lat, type='b', plottext, longlim=c(-180,180), latlim=c(-9
                  projection="aitoff", parameters=NULL, centre=c(0,0), add=FALSE,
                  fliplong=FALSE, nlat=6, nlong=6, prettybase=30, labels=TRUE, grid=TRUE,
                  grid.col='grey', grid.lty=2, auto=FALSE, upres=100, box=TRUE, labloc=c(90,-45),
-                 labeltype='deg', crunch=FALSE, ...){
+                 labeltype='deg', crunch=FALSE, lab.cex=1, ...){
   
   if(is.matrix(long) | is.data.frame(long)){
     lat = long[, 2]
@@ -104,16 +104,16 @@ magproj=function(long, lat, type='b', plottext, longlim=c(-180,180), latlim=c(-9
       latpretty=latgrid$tickat
       latpretty=latpretty[latpretty>latlim[1] & latpretty<latlim[2]]
       temp=mapproject(longpretty, rep(labloc[2],length(longpretty)))
-      if(labeltype=='deg'){text(temp,labels = longpretty %% 360)}
+      if(labeltype=='deg'){text(temp,labels = longpretty %% 360,cex = lab.cex)}
       if(labeltype=='sex'){
-        if(crunch==FALSE){text(temp,labels = deg2hms(longpretty %% 360,type='cat'))}
-        if(crunch==TRUE){text(temp,labels = paste(deg2hms(longpretty %% 360,type='mat')[,1],'h',sep=''))}
+        if(crunch==FALSE){text(temp,labels = deg2hms(longpretty %% 360,type='cat'),cex = lab.cex)}
+        if(crunch==TRUE){text(temp,labels = paste(deg2hms(longpretty %% 360,type='mat')[,1],'h',sep=''),cex = lab.cex)}
       }
       temp=mapproject(rep(labloc[1],length(latpretty)), latpretty)
-      if(labeltype=='deg'){text(temp,labels = latpretty)}
+      if(labeltype=='deg'){text(temp,labels = latpretty,cex = lab.cex)}
       if(labeltype=='sex'){
-        if(crunch==FALSE){text(temp,labels = deg2dms(latpretty,type='cat'))}
-        if(crunch==TRUE){text(temp,labels = paste(deg2dms(latpretty,type='mat')[,1],'\u00B0',sep=''))}
+        if(crunch==FALSE){text(temp,labels = deg2dms(latpretty,type='cat'),cex = lab.cex)}
+        if(crunch==TRUE){text(temp,labels = paste(deg2dms(latpretty,type='mat')[,1],'\u00B0',sep=''),cex = lab.cex)}
       }
     }
   }else{
