@@ -1,5 +1,6 @@
 \name{magMWdust}
 \alias{magMWdust}
+\alias{SFD_dust}
 \title{
 Plot a Milky Way dust overlay
 }
